@@ -21,12 +21,14 @@ name2class = {
     'Review': Review,
     'User': User
 }
-
+names = { 'Amenity': 'amenities', 'City': 'cities', 'Place': 'places',
+          'Review': 'reviews', 'State': 'states', 'User': 'users'}
 
 class DBStorage:
     __engine = None
     __session = None
-    __count = 0
+    __count = {'amenities': 0, 'cities': 0, 'places': 0,
+               'reviews': 0, 'states': 0,'users': 0}
 
     def __init__(self):
         user = os.getenv('HBNB_MYSQL_USER')
@@ -60,7 +62,9 @@ class DBStorage:
         self.__session = scoped_session(session_factory)
 
     def new(self, obj):
+        name = obj.__class__.__name__
         self.__count += 1
+        self.__count[names[name]] += 1
         self.__session.add(obj)
 
     def save(self):
@@ -71,7 +75,8 @@ class DBStorage:
             self.reload()
         if obj:
             self.__session.delete(obj)
-            self.__count -= 1
+            name = obj.__class__.__name__
+            self.__count += 1
 
     def close(self):
         """Dispose of current session if active"""
@@ -90,4 +95,8 @@ class DBStorage:
 
     def count(self, cls=None):
         """returns count of all objects in storage"""
-        return self.__count
+        if cls:
+            return len(self.all(name2class[cls]))
+        else:
+            
+            return len(self.all())
