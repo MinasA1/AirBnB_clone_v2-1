@@ -158,6 +158,10 @@ EOF  all  create  destroy  help  quit  show  update
 No known bugs at this time. 
 
 ## Authors
+###### Version 3
+
+- Minas Anton - [Github](https://github.com/MinasA1) / [Twitter](https://twitter.com/minas_anton)
+- Thomas Wang - [Github](https://github.com/thomaspwang) / [Twitter](https://twitter.com/thpwang)
 
 ###### Version 2
 
