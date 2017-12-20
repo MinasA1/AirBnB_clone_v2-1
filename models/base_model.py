@@ -39,6 +39,7 @@ class BaseModel:
                 self.created_at = datetime.strptime(self.created_at, time_fmt)
             if type(self.updated_at) is str:
                 self.updated_at = datetime.strptime(self.updated_at, time_fmt)
+        self.save()
 
     def __str__(self):
         """String representation of the BaseModel class"""

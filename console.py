@@ -21,6 +21,14 @@ classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
 class HBNBCommand(cmd.Cmd):
     """ HBNH console """
     prompt = '(hbnb) '
+        
+    def do_count(self, arg):
+        """count objects"""
+        if arg:
+            arg = arg.split()
+            print(models.storage.count(arg[0]))
+        else:
+            print(models.storage.count())
 
     def do_EOF(self, arg):
         """Exits console"""
