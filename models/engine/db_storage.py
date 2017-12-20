@@ -21,14 +21,15 @@ name2class = {
     'Review': Review,
     'User': User
 }
-names = { 'Amenity': 'amenities', 'City': 'cities', 'Place': 'places',
-          'Review': 'reviews', 'State': 'states', 'User': 'users'}
+names = {'Amenity': 'amenities', 'City': 'cities', 'Place': 'places',
+         'Review': 'reviews', 'State': 'states', 'User': 'users'}
+
 
 class DBStorage:
     __engine = None
     __session = None
     __count = {'amenities': 0, 'cities': 0, 'places': 0,
-               'reviews': 0, 'states': 0,'users': 0}
+               'reviews': 0, 'states': 0, 'users': 0}
 
     def __init__(self):
         user = os.getenv('HBNB_MYSQL_USER')
@@ -85,7 +86,7 @@ class DBStorage:
         """returns the object mathing cls and id"""
         if cls is None or id is None:
             return None
-        if type(cls)  == str:
+        if type(cls) == str:
             cls = name2class.get(cls, None)
         objects = self.all(cls)
         key = cls.__name__ + '.' + id
@@ -96,5 +97,4 @@ class DBStorage:
         if cls:
             return len(self.all(name2class[cls]))
         else:
-            
             return len(self.all())
