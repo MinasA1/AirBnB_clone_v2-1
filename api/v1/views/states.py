@@ -1,11 +1,14 @@
-#!/usr/bin/env python3                                                                                                              """api.v1.views states"""
+#!/usr/bin/env python3
+"""api.v1.views states"""
 from api.v1.views import app_views
 from flask import jsonify, request
 from models import storage
 from models.state import State
 
+
 @app_views.route('/states/<state_id>', methods=['GET', 'DELETE', 'PUT'])
-@app_views.route('/states', methods=['GET', 'POST'], defaults={'state_id': None})
+@app_views.route('/states', methods=['GET', 'POST'],
+                 defaults={'state_id': None})
 def get_states(state_id):
     """states method for retrieving and deleting State objects """
     if request.method == 'POST':
