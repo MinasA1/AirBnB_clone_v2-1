@@ -15,8 +15,9 @@ from models.user import User
 classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
            "Place": Place, "Review": Review, "State": State, "User": User}
 
-names = { 'Amenity': 'amenities', 'City': 'cities', 'Place': 'places',
-          'Review': 'reviews', 'State': 'states', 'User': 'users'}
+names = {'Amenity': 'amenities', 'City': 'cities', 'Place': 'places',
+         'Review': 'reviews', 'State': 'states', 'User': 'users'}
+
 
 class FileStorage:
     """serializes instances to a JSON file & deserializes back to instances"""
@@ -25,9 +26,6 @@ class FileStorage:
     __file_path = "file.json"
     # dictionary - empty but will store all objects by <class name>.id
     __objects = {}
-    __count = {'amenities': 0, 'cities': 0, 'places': 0,
-               'reviews': 0, 'states': 0,'users': 0}
-    __total = 0
 
     def all(self, cls=None):
         """returns the dictionary __objects"""
@@ -46,8 +44,6 @@ class FileStorage:
             name = obj.__class__.__name__
             key = obj.__class__.__name__ + "." + obj.id
             self.__objects[key] = obj
-            self.__count[names[name]] += 1
-            self.__total += 1
 
     def save(self):
         """serializes __objects to the JSON file (path: __file_path)"""
@@ -59,13 +55,10 @@ class FileStorage:
 
     def reload(self):
         """deserializes the JSON file to __objects"""
-        try:
-            with open(self.__file_path, 'r') as f:
-                jo = json.load(f)
-            for key in jo:
-                self.__objects[key] = classes[jo[key]["__class__"]](**jo[key])
-        except:
-            pass
+        with open(self.__file_path, 'r') as f:
+            jo = json.load(f)
+        for key in jo:
+            self.__objects[key] = classes[jo[key]["__class__"]](**jo[key])
 
     def delete(self, obj=None):
         """delete obj from __objects if it’s inside"""
@@ -73,8 +66,6 @@ class FileStorage:
             name = obj.__class__.__name__
             del self.__objects[obj.__class__.__name__ + '.' + obj.id]
             self.save()
-            self.__count[names[name]] -= 1
-            self.__total -= 1
 
     def close(self):
         """Deserialize JSON file to objects"""
@@ -95,6 +86,7 @@ class FileStorage:
     def count(self, cls=None):
         """returns count of all objects in storage"""
         if cls:
-            return self.__count[names[cls]]
+            if cls is not 'BaseModel':
+                return len(self.all([names[cls]]))
         else:
-            return self.__total
+            return len(self.all())
