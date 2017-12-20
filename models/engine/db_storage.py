@@ -26,7 +26,6 @@ name2class = {
 class DBStorage:
     __engine = None
     __session = None
-    __count = 0
 
     def __init__(self):
         user = os.getenv('HBNB_MYSQL_USER')
@@ -60,7 +59,6 @@ class DBStorage:
         self.__session = scoped_session(session_factory)
 
     def new(self, obj):
-        self.__count += 1
         self.__session.add(obj)
 
     def save(self):
@@ -71,23 +69,7 @@ class DBStorage:
             self.reload()
         if obj:
             self.__session.delete(obj)
-            self.__count -= 1
 
     def close(self):
         """Dispose of current session if active"""
         self.__session.remove()
-
-    def get(self, cls, id):
-        """returns the object mathing cls and id"""
-        if cls is None or id is None:
-            return None
-        objects = self.all(cls)
-        key = cls.__class__.__name__ + '.' + id
-        if objects[key]:
-            return objects[key]
-        else:
-            return None
-
-    def count(self, cls=None):
-        """returns count of all objects in storage"""
-        return self.__count
