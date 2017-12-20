@@ -23,6 +23,7 @@ class FileStorage:
     __file_path = "file.json"
     # dictionary - empty but will store all objects by <class name>.id
     __objects = {}
+    __count = 0
 
     def all(self, cls=None):
         """returns the dictionary __objects"""
@@ -40,6 +41,7 @@ class FileStorage:
         if obj is not None:
             key = obj.__class__.__name__ + "." + obj.id
             self.__objects[key] = obj
+            self.__count += 1
 
     def save(self):
         """serializes __objects to the JSON file (path: __file_path)"""
@@ -64,7 +66,23 @@ class FileStorage:
         if obj is not None:
             del self.__objects[obj.__class__.__name__ + '.' + obj.id]
             self.save()
+            self.__count -= 1
 
     def close(self):
         """Deserialize JSON file to objects"""
         self.reload()
+
+    def get(self, cls, id):
+        """returns the object mathing cls and id"""
+        if cls is None or id is None:
+            return None
+        objects = self.all(cls)
+        key = cls.__class__.__name__ + '.' + id
+        if objects[key]:
+            return objects[key]
+        else:
+            return None
+
+    def count(self, cls=None):
+        """returns count of all objects in storage"""
+        return self.__count
