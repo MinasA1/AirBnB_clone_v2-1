@@ -29,7 +29,7 @@ HBNB_TYPE_STORAGE: the type of storage used. It can be “file” (using FileSto
 * [File Descriptions](#file-descriptions)
 * [Usage](#usage)
 * [Examples of use](#examples-of-use)
-* [Testing(#testing)
+* [Testing](#testing)
 * [Bugs](#bugs)
 * [Authors](#authors)
 * [License](#license)
