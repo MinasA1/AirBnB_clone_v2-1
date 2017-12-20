@@ -1,7 +1,16 @@
 # <img src="https://www.holbertonschool.com/assets/holberton-logo-simplified-71b02868461c07d54553e4a7cc05d1926681a6755cc19030b0458f2d70ae9909.png" width="30"> AirBnB Clone V.2 - MYSQL
 
 ## Synopsis
-This is the 2nd version of our AirBnB clone project. We will be using a MySQL database with the following environmental variables:
+This is the 3rd version of our AirBnB clone project. We will be implementing a RESTful API with Flask.
+
+We will be using a MySQL database with the following environmental variables:
+
+HBNB_ENV: running environment. It can be “dev” or “test” for the moment (“production” soon!)
+HBNB_MYSQL_USER: the username of your MySQL
+HBNB_MYSQL_PWD: the password of your MySQL
+HBNB_MYSQL_HOST: the hostname of your MySQL
+HBNB_MYSQL_DB: the database name of your MySQL
+HBNB_TYPE_STORAGE: the type of storage used. It can be “file” (using FileStorage) or db (using DBStorage)
 
 <ul>
 <li><code>HBNB_ENV</code>: running environment. It can be &ldquo;dev&rdquo; or &ldquo;test&rdquo; for the moment (&ldquo;production&rdquo; soon!)</li>
@@ -12,7 +21,7 @@ This is the 2nd version of our AirBnB clone project. We will be using a MySQL da
 <li><code>HBNB_TYPE_STORAGE</code>: the type of storage used. It can be &ldquo;file&rdquo; (using <code>FileStorage</code>) or <code>db</code> (using <code>DBStorage</code>)</li>
 </ul>
 
-<p><img src="https://s3.amazonaws.com/intranet-projects-files/concepts/74/hbnb_step2.png" alt="step2"></p>
+<p><img src="https://s3.amazonaws.com/intranet-projects-files/concepts/74/hbnb_step4.png" alt="step2"></p>
 
 ## Table of Contents
 * [Environment](#environment)
@@ -20,6 +29,7 @@ This is the 2nd version of our AirBnB clone project. We will be using a MySQL da
 * [File Descriptions](#file-descriptions)
 * [Usage](#usage)
 * [Examples of use](#examples-of-use)
+* [Testing(#testing)
 * [Bugs](#bugs)
 * [Authors](#authors)
 * [License](#license)
@@ -152,6 +162,19 @@ EOF  all  create  destroy  help  quit  show  update
 (hbnb) show BaseModel 7da56403-cc45-4f1c-ad32-bfafeb2bb050
 ** no instance found **
 (hbnb) quit
+```
+
+## Testing
+We are using the unittest module, and all tests are located in `./tests`. To execute the unit tests, use the following commands:
+
+- File Storage:
+```
+$ python3 -m unittest discover tests 2>&1 | tail -1
+```
+
+- DB Storage:
+```
+HBNB_ENV=test HBNB_MYSQL_USER=hbnb_test HBNB_MYSQL_PWD=hbnb_test_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_test_db HBNB_TYPE_STORAGE=db python3 -m unittest discover tests 2>&1 /dev/null | tail -n 1
 ```
 
 ## Bugs
