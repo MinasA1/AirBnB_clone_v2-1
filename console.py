@@ -21,7 +21,7 @@ classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
 class HBNBCommand(cmd.Cmd):
     """ HBNH console """
     prompt = '(hbnb) '
-
+        
     def do_count(self, arg):
         """count objects"""
         if arg:
