@@ -5,13 +5,6 @@ This is the 3rd version of our AirBnB clone project. We will be implementing a R
 
 We will be using a MySQL database with the following environmental variables:
 
-HBNB_ENV: running environment. It can be “dev” or “test” for the moment (“production” soon!)
-HBNB_MYSQL_USER: the username of your MySQL
-HBNB_MYSQL_PWD: the password of your MySQL
-HBNB_MYSQL_HOST: the hostname of your MySQL
-HBNB_MYSQL_DB: the database name of your MySQL
-HBNB_TYPE_STORAGE: the type of storage used. It can be “file” (using FileStorage) or db (using DBStorage)
-
 <ul>
 <li><code>HBNB_ENV</code>: running environment. It can be &ldquo;dev&rdquo; or &ldquo;test&rdquo; for the moment (&ldquo;production&rdquo; soon!)</li>
 <li><code>HBNB_MYSQL_USER</code>: the username of your MySQL</li>
