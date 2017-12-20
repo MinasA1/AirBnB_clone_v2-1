@@ -63,7 +63,6 @@ class DBStorage:
 
     def new(self, obj):
         name = obj.__class__.__name__
-        self.__count += 1
         self.__count[names[name]] += 1
         self.__session.add(obj)
 
@@ -74,9 +73,9 @@ class DBStorage:
         if not self.__session:
             self.reload()
         if obj:
-            self.__session.delete(obj)
             name = obj.__class__.__name__
-            self.__count += 1
+            self.__count[names[name]] -= 1
+            self.__session.delete(obj)
 
     def close(self):
         """Dispose of current session if active"""
