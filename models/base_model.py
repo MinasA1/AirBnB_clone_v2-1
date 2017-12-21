@@ -60,6 +60,8 @@ class BaseModel:
             new_dict["updated_at"] = new_dict["updated_at"].isoformat()
         new_dict["__class__"] = self.__class__.__name__
         new_dict.pop('_sa_instance_state', None)
+        if getenv("HBNB_TYPE_STORAGE") is not 'db':
+            new_dict.pop('password', None)
         return new_dict
 
     def delete(self):
