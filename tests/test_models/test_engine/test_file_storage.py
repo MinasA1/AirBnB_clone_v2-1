@@ -110,3 +110,19 @@ class TestFileStorage(unittest.TestCase):
         with open("file.json", "r") as f:
             js = f.read()
         self.assertEqual(json.loads(string), json.loads(js))
+
+    def test_get(self):
+        """Test that get returns obj or None"""
+        storage = FileStorage()
+        state = State()
+        state.save()
+        state2 = storage.get('State', state.id)
+        state3 = storage.get("State", "id")
+        state4 = storage.get(None, state.id)
+        state5 = storage.get("State", None)
+        state6 = storage.get("wrongname", state.id)
+        self.assertTrue(state.id == state2.id)
+        self.assertTrue(state3 is None)
+        self.assertTrue(state4 is None)
+        self.assertTrue(state5 is None)
+        self.assertTrue(state6 is None)
