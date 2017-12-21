@@ -12,7 +12,7 @@ from models.amenity import Amenity
 def get_amenities(amenity_id):
     """method for retrieving, deleting, creating, updating amenity objects"""
     if amenity_id:
-        amenity = storage.get('Amenity', amenity_id)  # retrieves obj
+        amenity = storage.get(Amenity, amenity_id)  # retrieves obj
         if amenity is None:
             return jsonify({'error': 'Not found'}), 404
         if request.method == 'DELETE':
@@ -37,13 +37,13 @@ def get_amenities(amenity_id):
         js = request.get_json()
         if js is None:
             return jsonify({'error': 'Not a JSON'}), 400
-        if js.get('name', None):
+        if js.get('name', None) is None:
             return jsonify({'error': 'Missing name'}), 400
         obj = Amenity(**js)  # creates
         obj.save()
-        return jsonify(obj.to_dict()), 200
+        return jsonify(obj.to_dict()), 201
 
-    amentiies = []
+    amenities = []
     amenities_obj = storage.all('Amenity')  # retrieves list obj
     for obj in amenities_obj:
         amenities.append(amenities_obj[obj].to_dict())
