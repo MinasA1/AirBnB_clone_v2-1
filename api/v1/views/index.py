@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """api.v1.views index"""
 from flask import Blueprint, jsonify
 from models import storage

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """blueprint app_views"""
 from flask import Blueprint
 from api.v1.views.index import *
