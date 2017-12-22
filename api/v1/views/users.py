@@ -38,8 +38,10 @@ def get_users(user_id):
         js = request.get_json()
         if js is None:
             return jsonify({'error': 'Not a JSON'}), 400
-        if js.get('email', None) is None and js.get('password', None) is None:
-            return jsonify({'error': 'Missing name'}), 400
+        if js.get('email', None) is None:
+            return jsonify({'error': 'Missing email'}), 400
+        if js.get('password', None) is None:
+            return jsonify({'error': 'Missing password'}), 400
         obj = User(**js)  # creates
         obj.save()
         return jsonify(obj.to_dict()), 201
