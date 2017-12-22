@@ -89,7 +89,10 @@ class DBStorage:
         if type(cls) == str:
             cls = name2class.get(cls, None)
         objects = self.all(cls)
-        key = cls.__name__ + '.' + id
+        try:
+            key = cls.__name__ + '.' + id
+        except AttributeError:
+            return None
         return objects.get(key, None)
 
     def count(self, cls=None):

@@ -41,7 +41,7 @@ def get_states(state_id):
             state.save()
             return jsonify(state.to_dict()), 200
         else:
-            return jsonify(state.to_dict())
+            return jsonify(state.to_dict()), 200
     states = []
     states_obj = storage.all('State')
     for obj in states_obj:
