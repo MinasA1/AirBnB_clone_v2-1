@@ -33,8 +33,8 @@ class User(BaseModel, Base):
         last_name = ""
 
     def __init__(self, *args, **kwargs):
-        """initializes user"""
-        pass = kwargs.pop('password', None)
-        if pass:
-            kwargs['password'] = md5(pass).hexdigest()
+        """initialize user"""
+        passl = kwargs.pop('password', None)
+        if passl:
+            kwargs['password'] = md5(passl).hexdigest()
         super().__init__(*args, **kwargs)
