@@ -7,7 +7,8 @@ from models.place import Place
 from models.amenity import Amenity
 
 
-@app_views.route('/places/<place_id>/amenities/<amenity_id>', methods=['DELETE', 'POST'])
+@app_views.route('/places/<place_id>/amenities/<amenity_id>',
+                 methods=['DELETE', 'POST'])
 @app_views.route('/places/<place_id>/amenities/', methods=['GET'])
 def get_places_amenities(place_id, amenity_id=None):
     """method to retrive all amenities for a place"""

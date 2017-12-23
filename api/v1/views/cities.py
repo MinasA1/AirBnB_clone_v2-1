@@ -6,6 +6,7 @@ from models import storage
 from models.state import State
 from models.city import City
 
+
 @app_views.route('/state/<state_id>/cities', methods=['GET', 'POST'])
 def get_cities_state(state_id):
     """method to get cities for given state"""
@@ -28,6 +29,7 @@ def get_cities_state(state_id):
         if cities[city].state_id == state.id:
             match.append(cities[city].to_dict())
     return jsonify(match), 200
+
 
 @app_views.route('cities/<city_id>', methods=['GET', 'DELETE', 'PUT'])
 def get_city(city_id):

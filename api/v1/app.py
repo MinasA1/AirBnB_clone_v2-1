@@ -8,10 +8,12 @@ from os import getenv
 from flask_cors import CORS
 path.insert(0, "../")
 
+
 app = Flask('api')
 app.url_map.strict_slashes = False
 app.register_blueprint(app_views)
 CORS(app, resources={r"/*": {'origins': "0.0.0.0"}})
+
 
 @app.teardown_appcontext
 def teardown(self):

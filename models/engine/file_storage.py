@@ -90,7 +90,6 @@ class FileStorage:
     def count(self, cls=None):
         """returns count of all objects in storage"""
         if cls:
-            if cls is not 'BaseModel':
-                return len(self.all([names[cls]]))
+            return len(self.all(cls))
         else:
             return len(self.all())
